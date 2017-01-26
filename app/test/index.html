@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<title>Bad TV Shader for Three.js</title>
+	<meta charset='utf-8'>
+	<style>
+	body, html {
+		background-color: #000;
+		margin: 0;
+		overflow: hidden;
+		height: 100%;
+
+	}
+
+  .main-container {
+    margin: 0 auto;
+  }
+
+  .text-area {
+    width: 300px;
+    height: 200px;
+  }
+	.btn-send-txt {
+	  color: white;
+    background-color: blue;
+    width: 150px;
+    height: 70px;
+    cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+
+
+	<div id='main-container'>
+		<textarea class='text-area' id='text' placeholder="enter message"></textarea>
+    <div class="btn-send-txt">
+
+    </div>
+	</div>
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script> -->
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- <script src='js/events.js'></script> -->
+
+	<script>
+  $( document ).ready(function() {
+    $('.btn-send-txt').on("click", function() {
+      axios.post('http://localhost:3000/message', {
+        message: $('.text-area').val()
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    })
+  });
+	</script>
+</body>
+</html>
