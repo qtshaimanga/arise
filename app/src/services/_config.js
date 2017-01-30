@@ -1,1 +1,3 @@
-var _config = module.exports = {};
+var _config = module.exports = {
+
+};

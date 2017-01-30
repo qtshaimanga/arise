@@ -1,12 +1,12 @@
 export default [
   {
     type: 'png',
-    id: 'vue-logo-1',
-    url: require('../assets/images/vue.png')
+    id: 'vue_logo',
+    url: './dist/assets/images/vue.png'
   },
   {
-    type: 'png',
-    id: 'vue-logo-2',
-    url: require('../assets/images/vue.png')
+    type: 'json',
+    id: 'json_data',
+    url: './dist/assets/texts/text.json'
   },
 ]

@@ -1,7 +1,7 @@
 <template>
   <div class="loader">
     <div class="container">
-      <div id="progress-counter">{{ progress }}</div>
+      <div id="progress-counter">{{ progress }}%</div>
       <div id="progress-bar"></div>
     </div>
   </div>
@@ -10,7 +10,7 @@
 <script>
 import TweenMax from 'gsap';
 import AssetsLoader from 'assets-loader';
-import Assets from '../services/resources';
+import Resources from '../services/resources';
 
 import { setLoaderDisplayerState, setProgressValueState, setListOfRessourcesState } from '../vuex/actions';
 import { getLoaderDisplayerState, getProgressValueState, getListOfRessourcesState } from '../vuex/getters';
@@ -26,18 +26,18 @@ export default {
   vuex: {
     actions: {
       setLoaderDisplayer: setLoaderDisplayerState,
-      setProgressValue: setProgressValueState,
-      setListOfRessources: setListOfRessourcesState
+      setListOfRessources: setListOfRessourcesState,
+      setProgressValue: setProgressValueState
     },
     getters: {
       getLoaderDisplayer: getLoaderDisplayerState,
+      getListOfRessources: getListOfRessourcesState,
       getProgressValue: getProgressValueState,
-      getListOfRessources: getListOfRessourcesState
     }
   },
   watch: {
 		getProgressValue: function(){
-			TweenMax.to(this, 1, {
+			TweenMax.to(this, 0.2, {
 				progress: this.getProgressValue,
 				onUpdate: () => {
 					this.progress = Math.ceil( this.progress );
@@ -50,18 +50,18 @@ export default {
 		}
 	},
   created: function() {
-    this.assetsLoader();
+    this.initResourcesWithLoader();
   },
 	mounted: function() {
   },
   methods:{
-    assetsLoader: function(){
+    initResourcesWithLoader: function(){
       var that = this;
       var audioContext = new AudioContext();
       var loader = new AssetsLoader({
         webAudioContext: audioContext,
-        assets: Assets
       })
+      .add(Resources)
       .on('error', function(error) {
         console.log("loading error", error);
       })
@@ -69,8 +69,8 @@ export default {
         that.setProgressValue((progress * 100).toFixed());
       })
       .on('complete', function(map) {
-        loader.get().forEach(function(file) {
-          that.setListOfRessources(file);
+        loader.get().forEach(function(resource) {
+          that.setListOfRessources(resource);
         });
       })
       .start();
@@ -89,17 +89,22 @@ export default {
     height: 100%;
     margin: 0px;
     padding: 0px;
+    display: flex;
+    justify-content: center;
   }
 
   .container{
     width: 10%;
     height: 10%;
-  }
-
-  #progress-bar{
-    width: 0px;
-    height: 3px;
-    background-color: #000000;
+    margin: auto;
+    #progress-bar{
+      width: 0px;
+      height: 3px;
+      background-color: #000000;
+    }
+    #progress-counter{
+      text-align: center;
+    }
   }
 
 </style>

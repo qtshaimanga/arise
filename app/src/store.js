@@ -24,7 +24,7 @@ const mutations = {
   },
   PROGRESSVALUE (state, progress) {
     state.progressValue = progress;
-  }
+  },
 }
 
 export default new Vuex.Store({

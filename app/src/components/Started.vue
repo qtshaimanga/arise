@@ -1,11 +1,15 @@
 <template>
   <div class="started">
+    <div class="container">
+      <p>{{ getListOfRessources.json_data.file.INTRO.text }}</p>
+      <img :src="getListOfRessources.vue_logo.file.src" />
+    </div>
   </div>
 </template>
 
 <script>
 // import { } from '../vuex/actions';
-// import { } from '../vuex/getters';
+import { getListOfRessourcesState } from '../vuex/getters';
 
 export default {
   name: 'started',
@@ -16,11 +20,14 @@ export default {
   vuex: {
     actions: {
     },
-    getters: {}
+    getters: {
+      getListOfRessources: getListOfRessourcesState
+    }
   },
   watch: {},
   created: function() {},
-	mounted: function() {},
+	mounted: function() {
+  },
   methods:{}
 }
 </script>
@@ -30,12 +37,25 @@ export default {
 @import "../styles/variables.scss";
 
   .started{
-    // position: absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
     background-color: gray;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container{
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: auto;
+    p{
+      text-align: center;
+    }
+    img{
+    }
   }
 
 </style>
