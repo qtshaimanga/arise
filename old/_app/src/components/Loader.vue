@@ -1,7 +1,7 @@
 <template>
   <div class="loader">
     <div class="container">
-      <div id="progress-counter">{{ progress }}</div>
+      <div id="progress-counter">{{ progress }} %</div>
       <div id="progress-bar"></div>
     </div>
   </div>
@@ -89,17 +89,21 @@ export default {
     height: 100%;
     margin: 0px;
     padding: 0px;
+    display: flex;
+    justify-content: center;
   }
 
   .container{
     width: 10%;
-    height: 10%;
+    height: auto;
+    margin: auto;
+    #progress-counter{
+      text-align: center;
+    }
+    #progress-bar{
+      width: 0px;
+      height: 3px;
+      background-color: #000000;
+    }
   }
-
-  #progress-bar{
-    width: 0px;
-    height: 3px;
-    background-color: #000000;
-  }
-
 </style>

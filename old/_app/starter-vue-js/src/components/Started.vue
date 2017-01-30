@@ -16,7 +16,8 @@ export default {
   vuex: {
     actions: {
     },
-    getters: {}
+    getters: {
+    }
   },
   watch: {},
   created: function() {},
@@ -30,7 +31,7 @@ export default {
 @import "../styles/variables.scss";
 
   .started{
-    // position: absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
     margin: 0px;
