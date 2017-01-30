@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const state = {
   loaderDisplayer: Boolean(true),
-  resources: Object(),
+  assets: Object(),
   progressValue: Number(),
 }
 
@@ -19,8 +19,8 @@ const mutations = {
       throw new Error("variable for LoaderDisplayer state invalid");
     }
   },
-  RESOURCES (state, resource) {
-    state.resources[resource.id] = resource;
+  ASSETS (state, asset) {
+    state.assets[asset.id] = asset;
   },
   PROGRESSVALUE (state, progress) {
     state.progressValue = progress;

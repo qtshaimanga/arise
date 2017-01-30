@@ -6,7 +6,7 @@ import store from './store';
 
 Vue.use(require('vue-resource'));
 
-Vue.http.options.root = 'http://localhost:8000';
+Vue.http.options.root = 'http://localhost:3000';
 
 const app = new Vue({
   router,
