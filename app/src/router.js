@@ -5,6 +5,7 @@ import App from './App'
 import Start from './containers/Start'
 import Send from './components/Send'
 import MainSend from './containers/MainSend'
+import TextSent from './components/TextSent'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,11 @@ const routes = [
     path: '/send',
     name : 'send',
     component: MainSend
+  },
+  {
+    path: '/text-sent',
+    name : 'text-sent',
+    component: TextSent
   }
 ];
 

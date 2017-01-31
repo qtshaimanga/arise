@@ -57,7 +57,7 @@ export default {
     position: absolute;
     top: 0;
     z-index: 2;
-    border-bottom: 2px solid $dark-pale-pink;
+    border-bottom: 1px solid $dark-pale-pink;
     background-color: white;
     margin: 0px;
     padding: 0px;

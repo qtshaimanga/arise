@@ -144,7 +144,7 @@ export default {
       this.message = this.$refs.textInput;
       this.$http.post('http://localhost:3000/message', {message: this.message.value}).then(response => {
         console.log("response : ",response);
-
+        this.$router.push('/text-sent')
       }, response => {
         // error callback
       });
@@ -192,6 +192,7 @@ export default {
       width: 100%;
       height: 375px;
       .send-text-form-input {
+        font-size: 14px;
         border: none;
         width: 325px;
         height: 300px;
@@ -209,7 +210,7 @@ export default {
         width: 300px;
         background-color: $grey;
         opacity: 0.2;
-        height: 2px;
+        height: 1px;
         margin: 0 auto;
       }
     }
@@ -299,13 +300,13 @@ export default {
   }
   .cross {
     position: absolute;
-    top: 17px;
-    left: 17px;
+    top: 14px;
+    left: 14px;
     background-image: url('../assets/icons/cross-blue.svg');
     background-size: cover;
     background-repeat: no-repeat;
-    width: 7px;
-    height: 7px;
+    width: 13px;
+    height: 13px;
     @include transition( all .1s ease-in);
   }
 }
