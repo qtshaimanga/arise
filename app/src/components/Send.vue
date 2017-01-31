@@ -18,11 +18,11 @@
       </div>
       <div class="send-text-form-container" ref="sendTextForm">
         <div class="send-text-form-input-container">
-          <textarea class="send-text-form-input" placeholder="Write your message here">
+          <textarea class="send-text-form-input" placeholder="Write your message here" ref="textInput">
           </textarea>
           <div class="form-separator"></div>
         </div>
-        <div class="send-text-btn">
+        <div class="send-text-btn" @click="onSendText">
           send
         </div>
       </div>
@@ -139,6 +139,15 @@ export default {
       this.textBgElCloseTween.updateTo({ease:Expo.easeInOut});
       this.imageBgElCloseTween.updateTo({ease:Expo.easeInOut});
       this.openSendTextPane.reverse();
+    },
+    onSendText() {
+      this.message = this.$refs.textInput;
+      this.$http.post('http://localhost:3000/message', {message: this.message.value}).then(response => {
+        console.log("response : ",response);
+
+      }, response => {
+        // error callback
+      });
     }
   }
 }
