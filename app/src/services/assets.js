@@ -24,4 +24,9 @@ export default [
     id: 'illu_send_img',
     url: require('../assets/images/illu-send-img.png')
   },
+  {
+    type: 'svg',
+    id: 'cross_blue',
+    url: require('../assets/icons/cross-blue.svg')
+  },
 ]

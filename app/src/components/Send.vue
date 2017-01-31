@@ -1,12 +1,12 @@
 <template>
   <div class="send-container">
-    <div class="send-text-container">
+    <div class="send-text-container" ref="textBgEl" @click="openTextPane">
       <div class="send-content-container send-text-landing">
         <div class="send-separator send-text-separator"></div>
         <div class="send-title">
           send text to jantana
         </div>
-        <div class="send-quote">
+        <div class="send-quote" ref="sendTextQuoteEl">
           What about a lyric,</br>
           a quote or a</br>
           motivation quote ?
@@ -17,13 +17,13 @@
         </div>
       </div>
     </div>
-    <div class="send-image-container">
-      <div class="send-content-container send-image-landing">
+    <div class="send-image-container" ref="imageBgEl">
+      <div class="send-content-container send-image-landing" ref="imageContentEl">
         <div class="send-separator send-image-separator"></div>
-        <div class="send-title">
+        <div class="send-title" @click="sendImageClick">
           send image to jantana
         </div>
-        <div class="send-quote">
+        <div class="send-quote" ref="sendImageQuoteEl">
           Your worst selfie,</br>
           a meme screenshot</br>
           or a drawing
@@ -31,6 +31,10 @@
         <div class="send-illu-container">
           <div class="send-illu">
           </div>
+        </div>
+      </div>
+      <div class="close-pane image" ref="closePaneImage" @click="closeTextPane">
+        <div class="cross">
         </div>
       </div>
     </div>
@@ -67,11 +71,59 @@ export default {
   },
   watch: {
 	},
-  created: function() {
-  },
-	mounted: function() {
+	mounted() {
+    this.sendTextQuoteEl = this.$refs.sendTextQuoteEl;
+    this.sendImageQuoteEl = this.$refs.sendImageQuoteEl;
+    this.textBgEl = this.$refs.textBgEl;
+    this.imageBgEl = this.$refs.imageBgEl;
+    this.imageContentEl = this.$refs.imageContentEl;
+    this.closePaneImage = this.$refs.closePaneImage;
+    this.openSendTextPane = new TweenMax.TimelineMax({
+      paused: true
+    });
+    this.setPanesHeight();
+    this.generateTimelines();
   },
   methods:{
+    setPanesHeight() {
+      this.textBgEl.style.height = window.innerHeight - 100 +"px";
+      this.imageBgEl.style.height = window.innerHeight - 100+"px";
+    },
+    generateTimelines(){
+      this.textBgElCloseTween = TweenMax.to(this.textBgEl, 0.9, {
+        width: "90%",
+        ease: Expo.easeOut
+      })
+      this.imageBgElCloseTween = TweenMax.to(this.imageBgEl, 0.9, {
+        width: "10%",
+        ease: Expo.easeOut
+      })
+      this.openSendTextPane
+        .add(this.textBgElCloseTween)
+        .add(this.imageBgElCloseTween ,"-=0.9")
+        .add(TweenMax.to(this.imageContentEl, 0.4, {
+          opacity: 0
+        }),"-=0.9")
+        .add(TweenMax.to(this.sendTextQuoteEl, 0.5, {
+          opacity: 0
+        }),"-=0.5")
+        .add(TweenMax.to(this.closePaneImage, 0.3, {
+          opacity: 0.3
+        }),"-=0.6")
+    },
+    openTextPane() {
+      this.textBgElCloseTween.updateTo({ease:Expo.easeOut});
+      this.imageBgElCloseTween.updateTo({ease:Expo.easeOut});
+      this.openSendTextPane.play();
+    },
+    sendImageClick() {
+
+    },
+    closeTextPane() {
+      this.textBgElCloseTween.updateTo({ease:Expo.easeInOut});
+      this.imageBgElCloseTween.updateTo({ease:Expo.easeInOut});
+      this.openSendTextPane.reverse();
+    }
   }
 }
 </script>
@@ -80,13 +132,15 @@ export default {
 @import "../styles/mixins.scss";
 @import "../styles/variables.scss";
 @import "../styles/fonts.scss";
+@import "../styles/mixins.scss";
 
 .send-text-container {
-  position: absolute;
+  float: left;
   width: 50%;
   height: 100%;
   left: 0;
   background-color: $pale-yellow;
+  cursor: pointer;
 
   .send-text-separator {
     background-color: $dark-pale-yellow;
@@ -102,7 +156,7 @@ export default {
 
 }
 .send-image-container {
-  position: absolute;
+  float: right;
   width: 50%;
   height: 100%;
   right: 0;
@@ -119,8 +173,8 @@ export default {
       background-image: url("../assets/images/illu-send-img.png");
     }
   }
-
 }
+
 .send-content-container {
   margin: 75px 0 0 100px;
   width: 150px;
@@ -135,10 +189,6 @@ export default {
     color: black;
     text-transform: uppercase;
     margin-top: 50px;
-    cursor: pointer;
-    &:hover {
-      text-decoration: underline;
-    }
   }
   .send-quote {
     font-family: "cinetype-regular";
@@ -154,6 +204,33 @@ export default {
       background-position: center;
       background-size: cover;
     }
+  }
+}
+
+.close-pane.image {
+  @include center-y;
+  margin-left: 50px;
+  border: 1px solid #69a5a4;
+  opacity: 0;
+  border-radius: 20px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  &:hover {
+    .cross {
+      transform: rotate(90deg);
+    }
+  }
+  .cross {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    background-image: url('../assets/icons/cross-blue.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 7px;
+    height: 7px;
+    @include transition( all .1s ease-in);
   }
 }
 
