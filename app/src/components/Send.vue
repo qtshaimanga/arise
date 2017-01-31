@@ -16,6 +16,16 @@
           </div>
         </div>
       </div>
+      <div class="send-text-form-container" ref="sendTextForm">
+        <div class="send-text-form-input-container">
+          <textarea class="send-text-form-input" placeholder="Write your message here">
+          </textarea>
+          <div class="form-separator"></div>
+        </div>
+        <div class="send-text-btn">
+          send
+        </div>
+      </div>
     </div>
     <div class="send-image-container" ref="imageBgEl">
       <div class="send-content-container send-image-landing" ref="imageContentEl">
@@ -76,6 +86,7 @@ export default {
     this.sendImageQuoteEl = this.$refs.sendImageQuoteEl;
     this.textBgEl = this.$refs.textBgEl;
     this.imageBgEl = this.$refs.imageBgEl;
+    this.sendTextForm = this.$refs.sendTextForm;
     this.imageContentEl = this.$refs.imageContentEl;
     this.closePaneImage = this.$refs.closePaneImage;
     this.openSendTextPane = new TweenMax.TimelineMax({
@@ -110,8 +121,12 @@ export default {
         .add(TweenMax.to(this.closePaneImage, 0.3, {
           opacity: 0.3
         }),"-=0.6")
+        .add(TweenMax.to(this.sendTextForm, 0.3, {
+          opacity: 1
+        }),"-=0.6")
     },
     openTextPane() {
+      this.textBgEl.className = "send-text-container open";
       this.textBgElCloseTween.updateTo({ease:Expo.easeOut});
       this.imageBgElCloseTween.updateTo({ease:Expo.easeOut});
       this.openSendTextPane.play();
@@ -120,6 +135,7 @@ export default {
 
     },
     closeTextPane() {
+      this.textBgEl.className = "send-text-container";
       this.textBgElCloseTween.updateTo({ease:Expo.easeInOut});
       this.imageBgElCloseTween.updateTo({ease:Expo.easeInOut});
       this.openSendTextPane.reverse();
@@ -153,7 +169,54 @@ export default {
       background-image: url("../assets/images/illu-send-txt.png");
     }
   }
+  .send-text-form-container {
+    opacity: 0;
+    width: 350px;
+    left: 50%;
+    top: 245px;
+    position: absolute;
+    font-family: "cinetype-regular";
+    color: $grey;
 
+    .send-text-form-input-container {
+      background-color: white;
+      width: 100%;
+      height: 375px;
+      .send-text-form-input {
+        border: none;
+        width: 325px;
+        height: 300px;
+        padding: 25px 0 0 25px;
+        resize: none;
+      }
+      .send-text-form-input::-webkit-input-placeholder {
+        color: $grey;
+        font-size: 14px;
+        text-shadow: none;
+        -webkit-text-fill-color: initial;
+      }
+      .form-separator {
+        width: 300px;
+        background-color: $grey;
+        opacity: 0.2;
+        height: 2px;
+        margin: 0 auto;
+      }
+    }
+    .send-text-btn {
+      font-family: "mongoose-regular";
+      font-size: 25px;
+      background-color: $dark-pale-yellow;
+      color: white;
+      width: 150px;
+      height: 60px;
+      text-transform: uppercase;
+      line-height: 65px;
+      margin-top: 60px;
+      padding-left: 15px;
+      cursor: pointer;
+    }
+  }
 }
 .send-image-container {
   float: right;
@@ -205,6 +268,9 @@ export default {
       background-size: cover;
     }
   }
+}
+.send-text-container.open {
+  cursor: default;
 }
 
 .close-pane.image {
