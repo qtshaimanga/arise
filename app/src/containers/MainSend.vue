@@ -54,7 +54,7 @@ export default {
   .header-container {
     width: 100%;
     height: 90px;
-    // position: absolute;
+    position: absolute;
     top: 0;
     z-index: 2;
     border-bottom: 2px solid $dark-pale-pink;

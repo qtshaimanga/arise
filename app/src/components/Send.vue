@@ -97,8 +97,8 @@ export default {
   },
   methods:{
     setPanesHeight() {
-      this.textBgEl.style.height = window.innerHeight - 100 +"px";
-      this.imageBgEl.style.height = window.innerHeight - 100+"px";
+      this.textBgEl.style.height = window.innerHeight+"px";
+      this.imageBgEl.style.height = window.innerHeight+"px";
     },
     generateTimelines(){
       this.textBgElCloseTween = TweenMax.to(this.textBgEl, 0.9, {
@@ -188,6 +188,7 @@ export default {
         height: 300px;
         padding: 25px 0 0 25px;
         resize: none;
+        outline: none;
       }
       .send-text-form-input::-webkit-input-placeholder {
         color: $grey;
@@ -239,7 +240,7 @@ export default {
 }
 
 .send-content-container {
-  margin: 75px 0 0 100px;
+  margin: 175px 0 0 100px;
   width: 150px;
 
   .send-separator {
