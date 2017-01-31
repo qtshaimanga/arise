@@ -16,12 +16,12 @@ SoftwareSerial mySerial(RX_PIN, TX_PIN); // Declare SoftwareSerial obj first
 Adafruit_Thermal printer(&mySerial);     // Pass addr to printer constructor
 
 void setup() {
-
   Bridge.begin();
   client = PubSubClient("test.mosquitto.org", 1883, callback, yun);
   mySerial.begin(9600);  // Initialize SoftwareSerial
+  Serial.begin(9600);
+  //while (!mySerial);
   printer.begin();        // Init printer (same regardless of serial type)
-
 }
 
 void loop() {
@@ -48,6 +48,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   message_buff[i] = '\0';
 
   String msgString = String(message_buff);
+  Serial.println(msgString);
 
   // Print message on printer
   printer.justify('C');
@@ -58,7 +59,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 }
 
-void printer_test() {
+/*void printer_test() {
   // Test inverse on & off
   printer.inverseOn();
   printer.println(F("Inverse ON"));
@@ -119,4 +120,4 @@ void printer_test() {
   delay(3000L);         // Sleep for 3 seconds
   printer.wake();       // MUST wake() before printing again, even if reset
   printer.setDefault(); // Restore printer to defaults
-  }
+  }*/
