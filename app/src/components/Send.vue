@@ -39,6 +39,9 @@
           or a drawing
         </div>
         <div class="send-illu-container">
+          <!-- <video :src="getListOfRessources.send_img_landing_video.file.src" poster="posterimage.jpg"> -->
+
+          </video>
           <div class="send-illu">
           </div>
         </div>
@@ -54,8 +57,8 @@
 <script>
 import TweenMax from 'gsap';
 
-import { setLoaderDisplayerState, setProgressValueState, setListOfResourcesState } from '../vuex/actions';
-import { getLoaderDisplayerState, getProgressValueState, getListOfResourcesState } from '../vuex/getters';
+import { setLoaderDisplayerState, setProgressValueState, setListOfRessourcesState } from '../vuex/actions';
+import { getLoaderDisplayerState, getProgressValueState, getListOfRessourcesState } from '../vuex/getters';
 
 export default {
   name: 'send',
@@ -69,17 +72,18 @@ export default {
     actions: {
       setLoaderDisplayer: setLoaderDisplayerState,
       setProgressValue: setProgressValueState,
-      //setListOfResources: setListOfResourcesState
+      setListOfRessources: setListOfRessourcesState
     },
     getters: {
       getLoaderDisplayer: getLoaderDisplayerState,
       getProgressValue: getProgressValueState,
-      //getListOfResources: getListOfResourcesState
+      getListOfRessources: getListOfRessourcesState
     }
   },
   watch: {
 	},
 	mounted() {
+    console.log(this.getListOfRessources);
     this.sendTextQuoteEl = this.$refs.sendTextQuoteEl;
     this.sendImageQuoteEl = this.$refs.sendImageQuoteEl;
     this.textBgEl = this.$refs.textBgEl;
@@ -293,7 +297,7 @@ export default {
   cursor: pointer;
   &:hover {
     .cross {
-      transform: rotate(90deg);
+      transform: rotate(-90deg);
     }
   }
   .cross {
