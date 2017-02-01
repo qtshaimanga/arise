@@ -1,14 +1,7 @@
 <template>
-  <div class="main">
-    <div class="header-container">
-      <div class="header-logo-container">
-        <div class="header-logo">
-        </div>
-      </div>
-    </div>
-    <transition name="fade" appear>
-      <send v-if="!getLoaderDisplayer"></send>
-    </transition>
+  <div class="main" v-if="!getLoaderDisplayer">
+    <a-header></a-header>
+    <send></send>
   </div>
 </template>
 
@@ -16,6 +9,7 @@
 import Started from '../components/Started';
 import Loader from '../components/Loader';
 import Send from '../components/Send';
+import aHeader from '../components/aHeader';
 
 // import {  } from '../vuex/actions';
 import { getLoaderDisplayerState } from '../vuex/getters';
@@ -23,7 +17,8 @@ import { getLoaderDisplayerState } from '../vuex/getters';
 export default {
   name: 'main-send',
   components: {
-    Send
+    Send,
+    aHeader
   },
   data () {
     return {}
@@ -61,19 +56,6 @@ export default {
     background-color: white;
     margin: 0px;
     padding: 0px;
-
-    .header-logo-container {
-      margin: 20px auto 20px auto;
-      width: 90px;
-      height: 51px;
-      .header-logo {
-        min-width: 100%;
-        min-height: 100%;
-        background-image: url("../assets/images/logo_header.png");
-        background-position: center;
-        background-size: cover;
-      }
-    }
   }
 
 </style>

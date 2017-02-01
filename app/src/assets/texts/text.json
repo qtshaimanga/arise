@@ -1,5 +1,8 @@
 {
   "INTRO":{
     "text": "Hello World !"
+  },
+  "INVITE":{
+    "text": "it's time to setup your printer account so you can invite people to send you amazing stuff !"
   }
 }

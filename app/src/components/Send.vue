@@ -82,7 +82,6 @@ export default {
   watch: {
 	},
 	mounted() {
-    console.log(this.getListOfRessources);
     this.sendTextQuoteEl = this.$refs.sendTextQuoteEl;
     this.sendImageQuoteEl = this.$refs.sendImageQuoteEl;
     this.textBgEl = this.$refs.textBgEl;

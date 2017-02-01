@@ -37,8 +37,7 @@ export default {
   },
   watch: {
 		getProgressValue: function(){
-      console.log(this.getProgressValue);
-
+      //TODO TIME
 			TweenMax.to(this, 1, {
 				progress: this.getProgressValue,
 				onUpdate: () => {
@@ -49,7 +48,6 @@ export default {
           this.setLoaderDisplayer(false);
         }
 			});
-
 		}
 	},
   created: function() {

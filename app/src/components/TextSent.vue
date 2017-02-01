@@ -1,11 +1,6 @@
 <template>
-  <div class="text-sent-container">
-    <div class="header-container">
-      <div class="header-logo-container">
-        <div class="header-logo">
-        </div>
-      </div>
-    </div>
+  <div class="text-sent-container" v-if="!getLoaderDisplayer">
+    <a-header></a-header>
     <div class="text-sent-center-container">
       <div class="text-sent-title">
         yay !
@@ -22,6 +17,7 @@
 </template>
 
 <script>
+import aHeader from '../components/aHeader';
 import TweenMax from 'gsap';
 
 import { setLoaderDisplayerState, setProgressValueState, setListOfRessourcesState } from '../vuex/actions';
@@ -29,7 +25,9 @@ import { getLoaderDisplayerState, getProgressValueState, getListOfRessourcesStat
 
 export default {
   name: 'text-sent',
-  components: {},
+  components: {
+    aHeader,
+  },
   data () {
     return {
       progress: Number(),
@@ -74,19 +72,6 @@ export default {
   background-color: white;
   margin: 0px;
   padding: 0px;
-
-  .header-logo-container {
-    margin: 20px auto 20px auto;
-    width: 90px;
-    height: 51px;
-    .header-logo {
-      min-width: 100%;
-      min-height: 100%;
-      background-image: url("../assets/images/logo_header.png");
-      background-position: center;
-      background-size: cover;
-    }
-  }
 }
 .text-sent-container {
   position: absolute;
