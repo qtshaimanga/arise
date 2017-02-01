@@ -12,8 +12,8 @@
           motivation quote ?
         </div>
         <div class="send-illu-container">
-          <div class="send-illu">
-          </div>
+          <video :src="getListOfRessources.send_txt_landing_video.file.src" width="600" height="600" ref="txtVideo" class="video-txt">
+          </video>
         </div>
       </div>
       <div class="send-text-form-container" ref="sendTextForm">
@@ -91,6 +91,7 @@ export default {
     this.imageContentEl = this.$refs.imageContentEl;
     this.closePaneImage = this.$refs.closePaneImage;
     this.imgVideo = this.$refs.imgVideo;
+    this.txtVideo = this.$refs.txtVideo;
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
     this.setPanesHeight();
@@ -106,10 +107,17 @@ export default {
         this.imgVideo.play();
         this.imgVideo.loop = true;
       }
+      if (!this.txtVideo.paused){
+        this.txtVideo.pause();
+      }
     },
     mouseOverTxt() {
       if (!this.imgVideo.paused){
         this.imgVideo.pause();
+      }
+      if (this.txtVideo.paused){
+        this.txtVideo.play();
+        this.txtVideo.loop = true;
       }
     },
     generateTimelines(){
@@ -193,12 +201,13 @@ export default {
   left: 0;
   background-color: $pale-yellow;
   cursor: pointer;
+  overflow: hidden;
 
   .send-text-separator {
     background-color: $dark-pale-yellow;
   }
   .send-illu-container {
-    margin: -30px auto 20px auto;
+    margin: -160px auto 20px auto;
     width: 434px;
     height: 320px;
     .send-illu {
@@ -264,6 +273,7 @@ export default {
   right: 0;
   background-color: $pale-blue;
   overflow: hidden;
+  cursor: pointer;
 
   .send-image-separator {
     background-color: $dark-pale-blue;
