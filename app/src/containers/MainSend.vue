@@ -6,9 +6,9 @@
         </div>
       </div>
     </div>
-    <send></send>
-
-
+    <transition name="fade" appear>
+      <send v-if="!getLoaderDisplayer"></send>
+    </transition>
   </div>
 </template>
 

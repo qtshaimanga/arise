@@ -37,7 +37,9 @@ export default {
   },
   watch: {
 		getProgressValue: function(){
-			TweenMax.to(this, 0.2, {
+      console.log(this.getProgressValue);
+
+			TweenMax.to(this, 1, {
 				progress: this.getProgressValue,
 				onUpdate: () => {
 					this.progress = Math.ceil( this.progress );
@@ -47,6 +49,7 @@ export default {
           this.setLoaderDisplayer(false);
         }
 			});
+
 		}
 	},
   created: function() {

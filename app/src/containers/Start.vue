@@ -1,20 +1,13 @@
 <template>
   <div class="start">
-
-    <transition name="fade" appear>
-      <loader v-show="getLoaderDisplayer"></loader>
-	  </transition>
-
     <transition name="fade" appear>
       <started v-if="!getLoaderDisplayer"></started>
     </transition>
-
   </div>
 </template>
 
 <script>
 import Started from '../components/Started';
-import Loader from '../components/Loader';
 
 // import {  } from '../vuex/actions';
 import { getLoaderDisplayerState } from '../vuex/getters';
@@ -22,7 +15,6 @@ import { getLoaderDisplayerState } from '../vuex/getters';
 export default {
   name: 'start',
   components: {
-    Loader,
     Started,
   },
   data () {

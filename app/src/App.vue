@@ -1,14 +1,30 @@
 <template>
   <div class="app">
+    <transition name="fade" appear>
+      <loader v-show="getLoaderDisplayer"></loader>
+    </transition>
     <router-view class="view"></router-view>
   </div>
 </template>
 
 <script>
+import Loader from './components/Loader';
+import { getLoaderDisplayerState } from './vuex/getters';
+
 export default {
   name: 'app',
+  components: {
+    Loader,
+  },
   data () {
     return {}
+  },
+  vuex: {
+    actions: {
+    },
+    getters:{
+      getLoaderDisplayer: getLoaderDisplayerState,
+    }
   },
   mounted: function() {
     this.creditsLog();

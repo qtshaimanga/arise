@@ -39,8 +39,7 @@
           or a drawing
         </div>
         <div class="send-illu-container">
-          <!-- <video :src="getListOfRessources.send_img_landing_video.file.src" poster="posterimage.jpg"> -->
-
+          <video :src="getListOfRessources.send_img_landing_video.file.src">
           </video>
           <div class="send-illu">
           </div>
