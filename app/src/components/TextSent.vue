@@ -23,11 +23,9 @@
 
 <script>
 import TweenMax from 'gsap';
-import AssetsLoader from 'assets-loader';
-import Assets from '../services/assets';
 
-import { setLoaderDisplayerState, setProgressValueState, setListOfAssetsState } from '../vuex/actions';
-import { getLoaderDisplayerState, getProgressValueState, getListOfAssetsState } from '../vuex/getters';
+import { setLoaderDisplayerState, setProgressValueState, setListOfRessourcesState } from '../vuex/actions';
+import { getLoaderDisplayerState, getProgressValueState, getListOfRessourcesState } from '../vuex/getters';
 
 export default {
   name: 'text-sent',
@@ -41,12 +39,12 @@ export default {
     actions: {
       setLoaderDisplayer: setLoaderDisplayerState,
       setProgressValue: setProgressValueState,
-      setListOfAssets: setListOfAssetsState
+      setListOfRessources: setListOfRessourcesState
     },
     getters: {
       getLoaderDisplayer: getLoaderDisplayerState,
       getProgressValue: getProgressValueState,
-      getListOfAssets: getListOfAssetsState
+      getListOfRessources: getListOfRessourcesState
     }
   },
   watch: {

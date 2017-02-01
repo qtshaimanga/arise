@@ -27,6 +27,7 @@ export default {
   watch: {},
   created: function() {},
 	mounted: function() {
+
   },
   methods:{}
 }
