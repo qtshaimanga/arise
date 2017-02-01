@@ -98,7 +98,7 @@ export default {
               background-color: $pink-pale;
               font-family: "cinetype-regular";
               font-size: 14pt;
-              color: $grey-pale;
+              color: $grey-pale-opacity;
               width: 250px;
               border-style: solid;
               border-width: 0px 0px 1px 0px;

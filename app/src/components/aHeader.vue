@@ -3,8 +3,8 @@
     <div class="header-logo-container">
       <div class="header-logo">
       </div>
-      <p> printer n° {{ serialNumber }} </p>
     </div>
+    <p> printer n° {{ serialNumber }} </p>
   </div>
 </template>
 
@@ -65,12 +65,16 @@ export default {
         background-size: contain;
         background-repeat: no-repeat;
       }
-      p{
-        position: absolute;
-        right: 40px;
-        color: $grey;
-        font-size: 0.7rem;
-      }
+    }
+    p {
+      font-family: "cinetype-regular";
+      right: 40px;
+      color: $grey-pale-opacity;
+      font-size: 0.8rem;
+      opacity: 50%;
+      margin: 0px;
+      padding: 0px;
+      @include center-y;
     }
   }
 
