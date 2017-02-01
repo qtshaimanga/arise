@@ -4,7 +4,7 @@
       <div class="header-logo">
       </div>
     </div>
-    <p> printer n° {{ serialNumber }} </p>
+    <p v-if="serialNumber"> printer n° {{ serialNumber }} </p>
   </div>
 </template>
 
