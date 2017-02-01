@@ -1,6 +1,6 @@
 <template>
   <div class="invite"  v-if="!getLoaderDisplayer">
-    <a-header serial-number="126487"></a-header>
+    <a-header :serial-number="id"></a-header>
     <div class="container">
       <div class="invitElementRight">
         <div class="element">
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import User from '../assets/data/user.json'; //Test DATA
 import aHeader from '../components/aHeader';
 
 // import { } from '../vuex/actions';
@@ -33,7 +34,9 @@ export default {
     aHeader,
   },
   data () {
-    return {}
+    return {
+      id: Number()
+    }
   },
   vuex: {
     actions: {
@@ -44,9 +47,11 @@ export default {
     }
   },
   watch: {},
-  created: function() {},
+  created: function() {
+    this.id = this.$route.params.id;
+  },
 	mounted: function() {
-
+    //TODO ex envoyer l'adrese suivante http://localhost:8080/text-sent/1234 avec this.id
   },
   methods:{}
 }

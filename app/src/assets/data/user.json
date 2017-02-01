@@ -1,0 +1,22 @@
+{
+  "1234": {
+    "expediteur": {
+      "name": "Janthana",
+      "email": "janthana@gmail.com"
+    },
+    "correpondant": {
+      "name": "Nicolas",
+      "email": "nicolas@gmail.com"
+    }
+  },
+  "4321": {
+    "expediteur": {
+      "name": "Quentin",
+      "email": "quentin@gmail.com"
+    },
+    "correpondant": {
+      "name": "Benjamain",
+      "email": "benjamin@gmail.com"
+    }
+  }
+}

@@ -35,7 +35,9 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new FriendlyErrors(),
     new CopyWebpackPlugin([
-      { from: './src/assets', to: './dist/assets' },
+      { from: './src/assets', to:  './dist/assets' },
+      //path.resolve(__dirname,'../dist/assets')
+      //'./dist/assets'
       //{ from: '../static', to: '../static' },
     ])
   ]
