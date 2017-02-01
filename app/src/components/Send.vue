@@ -1,6 +1,6 @@
 <template>
   <div class="send-container">
-    <div class="send-text-container" ref="textBgEl" @click="openTextPane">
+    <div class="send-text-container" ref="textBgEl" @click="openTextPane" v-on:mouseover="mouseOverTxt">
       <div class="send-content-container send-text-landing">
         <div class="send-separator send-text-separator"></div>
         <div class="send-title">
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="send-image-container" ref="imageBgEl">
+    <div class="send-image-container" ref="imageBgEl" v-on:mouseover="mouseOverImg">
       <div class="send-content-container send-image-landing" ref="imageContentEl">
         <div class="send-separator send-image-separator"></div>
         <div class="send-title" @click="sendImageClick">
@@ -38,11 +38,11 @@
           a meme screenshot</br>
           or a drawing
         </div>
-        <div class="send-illu-container">
-          <video :src="getListOfRessources.send_img_landing_video.file.src">
+        <div class="send-illu-container" ref="sendIlluContainer">
+          <video :src="getListOfRessources.send_img_landing_video.file.src" width="800" height="800" ref="imgVideo" class="video-img">
           </video>
-          <div class="send-illu">
-          </div>
+          <!-- <div class="send-illu">
+          </div> -->
         </div>
       </div>
       <div class="close-pane image" ref="closePaneImage" @click="closeTextPane">
@@ -84,23 +84,38 @@ export default {
 	mounted() {
     this.sendTextQuoteEl = this.$refs.sendTextQuoteEl;
     this.sendImageQuoteEl = this.$refs.sendImageQuoteEl;
+    this.sendIlluContainer = this.$refs.sendIlluContainer;
     this.textBgEl = this.$refs.textBgEl;
     this.imageBgEl = this.$refs.imageBgEl;
     this.sendTextForm = this.$refs.sendTextForm;
     this.imageContentEl = this.$refs.imageContentEl;
     this.closePaneImage = this.$refs.closePaneImage;
-    this.openSendTextPane = new TweenMax.TimelineMax({
-      paused: true
-    });
+    this.imgVideo = this.$refs.imgVideo;
+    this.innerHeight = window.innerHeight;
+    this.innerWidth = window.innerWidth;
     this.setPanesHeight();
     this.generateTimelines();
   },
   methods:{
     setPanesHeight() {
-      this.textBgEl.style.height = window.innerHeight+"px";
-      this.imageBgEl.style.height = window.innerHeight+"px";
+      this.textBgEl.style.height = this.innerHeight+"px";
+      this.imageBgEl.style.height = this.innerHeight+"px";
+    },
+    mouseOverImg() {
+      if (this.imgVideo.paused){
+        this.imgVideo.play();
+        this.imgVideo.loop = true;
+      }
+    },
+    mouseOverTxt() {
+      if (!this.imgVideo.paused){
+        this.imgVideo.pause();
+      }
     },
     generateTimelines(){
+      this.openSendTextPane = new TweenMax.TimelineMax({
+        paused: true
+      });
       this.textBgElCloseTween = TweenMax.to(this.textBgEl, 0.9, {
         width: "90%",
         ease: Expo.easeOut
@@ -119,9 +134,21 @@ export default {
           opacity: 0
         }),"-=0.5")
         .add(TweenMax.to(this.closePaneImage, 0.3, {
+          onStart:()=>{
+            this.closePaneImage.style.display = "block";
+          },
+          onReverseComplete:()=>{
+            this.closePaneImage.style.display = "none";
+          },
           opacity: 0.3
         }),"-=0.6")
         .add(TweenMax.to(this.sendTextForm, 0.3, {
+          onStart:()=> {
+            this.sendTextForm.style.display = "block";
+          },
+          onReverseComplete:()=> {
+            this.sendTextForm.style.display = "none";
+          },
           opacity: 1
         }),"-=0.6")
     },
@@ -180,6 +207,7 @@ export default {
   }
   .send-text-form-container {
     opacity: 0;
+    display: none;
     width: 350px;
     left: 50%;
     top: 245px;
@@ -235,16 +263,18 @@ export default {
   height: 100%;
   right: 0;
   background-color: $pale-blue;
+  overflow: hidden;
 
   .send-image-separator {
     background-color: $dark-pale-blue;
   }
   .send-illu-container {
-    margin: -150px auto 20px auto;
-    width: 434px;
-    height: 420px;
-    .send-illu {
-      background-image: url("../assets/images/illu-send-img.png");
+    margin: -340px auto 0 auto;
+    display: inline-block;
+    overflow: hidden;
+    .video-img {
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -254,22 +284,28 @@ export default {
   width: 150px;
 
   .send-separator {
+    position: relative;
     width: 30px;
     height: 5px;
+    z-index: 2;
   }
   .send-title {
+    position: relative;
     font-family: "mongoose-regular";
     font-size: 52px;
     color: black;
     text-transform: uppercase;
     margin-top: 50px;
+    z-index: 2;
   }
   .send-quote {
+    position: relative;
     font-family: "cinetype-regular";
     font-size: 14px;
     color: $grey;
     margin-top: 50px;
     line-height: 23px;
+    z-index: 2;
   }
   .send-illu-container {
     .send-illu {
@@ -278,6 +314,9 @@ export default {
       background-position: center;
       background-size: cover;
     }
+    .video-img {
+      overflow: hidden;
+    }
   }
 }
 .send-text-container.open {
@@ -285,6 +324,7 @@ export default {
 }
 
 .close-pane.image {
+  display: none;
   @include center-y;
   margin-left: 50px;
   border: 1px solid #69a5a4;
