@@ -7,26 +7,26 @@ export default [
   {
     type: 'png',
     id: 'vue_logo',
-    url: require('../assets/images/vue.png')
+    url: './dist/assets/images/vue.png'
   },
   {
     type: 'png',
     id: 'logo_header',
-    url: require('../assets/images/logo_header.png')
+    url: './dist/assets/images/logo_header.png'
   },
   {
     type: 'png',
     id: 'illu_send_txt',
-    url: require('../assets/images/illu-send-txt.png')
+    url: './dist/assets/images/illu-send-txt.png'
   },
   {
     type: 'png',
     id: 'illu_send_img',
-    url: require('../assets/images/illu-send-img.png')
+    url: './dist/assets/images/illu-send-img.png'
   },
-  // {
-  //   type: 'svg',
-  //   id: 'cross_blue',
-  //   url: require('../assets/icons/cross-blue.svg')
-  // },
+  {
+    type: 'text',
+    id: 'cross_blue',
+    url: './dist/assets/icons/cross-blue.svg'
+  },
 ]
