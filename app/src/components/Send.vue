@@ -189,7 +189,7 @@ export default {
       this.message = this.$refs.textInput;
       this.$http.post('http://localhost:3000/message', {message: this.message.value}).then(response => {
         console.log("response : ",response);
-        this.$router.push('/text-sent')
+        this.$router.push({name:'text-sent', params:{ id:this.id}});
       }, response => {
         // error callback
       });
