@@ -3,6 +3,7 @@
 #include <Bridge.h>
 #include <YunClient.h>
 #include <PubSubClient.h>
+#include <Process.h>
 
 #include "SoftwareSerial.h"
 #define TX_PIN 2 // Arduino transmit  BLUE WIRE  labeled RX on printer
@@ -12,6 +13,7 @@ char message_buff[100];
 
 YunClient yun;
 PubSubClient client;
+Process date;
 
 SoftwareSerial mySerial(RX_PIN, TX_PIN); // Declare SoftwareSerial obj first
 Adafruit_Thermal printer(&mySerial);     // Pass addr to printer constructor
@@ -50,8 +52,18 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   String msgString = String(message_buff);
   //Serial.println(msgString);
-
+  date.begin("/bin/date");
+  date.addParameter("+%d/%m/%Y %T");
+  date.run();
+  
   // Print message on printer
+  printer.justify('L');
+  while (date.available()>0) {
+    // print the results we got.
+    printer.print(date.readString());
+  }
+  printer.println("");
+  printer.println("");
   printer.justify('C');
   printer.println(msgString);
   printer.println("");
