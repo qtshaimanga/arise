@@ -4,18 +4,19 @@
     <div class="container">
       <div class="invitElementRight">
         <div class="element">
-          <p> it's time to setup your printer </br> account so you can invite </br>  people to send you amazing stuff ! <p>
+          <p> It's time to setup your printer </br> account so you can invite </br>  people to send you amazing stuff ! <p>
           <div class="inviteForm">
             <form>
-              <input type="text" name="name" placeholder="name"></br>
-              <input type="text" name="email" placeholder="email"></br>
+              <input type="text" name="name" placeholder="Your name"></br>
+              <input type="text" name="email" placeholder="Your email"></br>
               <input type="submit" value="Next">
             </from>
           </div>
         </div>
       </div>
       <div class="inviteElementLeft">
-        <video/>
+        <video :src="getListOfRessources.invitation_landing_video.file.src" autoplay loop width="600" height="600" ref="invitationVideo" class="video-invitation">
+        </video>
       </div>
     </div>
   </div>
@@ -35,7 +36,8 @@ export default {
   },
   data () {
     return {
-      id: Number()
+      id: Number(),
+      invitationVideo: Object(),
     }
   },
   vuex: {
@@ -53,7 +55,8 @@ export default {
 	mounted: function() {
     //TODO ex envoyer l'adrese suivante http://localhost:8080/text-sent/1234 avec this.id
   },
-  methods:{}
+  methods:{
+  }
 }
 </script>
 
@@ -94,6 +97,7 @@ export default {
           font-family: "mongoose-regular";
           font-size: 35pt;
           margin-bottom: 50px;
+          letter-spacing: 3px;
         }
         .inviteForm{
           display: flex;
@@ -103,10 +107,12 @@ export default {
               background-color: $pink-pale;
               font-family: "cinetype-regular";
               font-size: 14pt;
+              line-height: 50px;
               color: $grey-pale-opacity;
               width: 250px;
-              border-style: solid;
+              border-bottom: solid 1px black;
               border-width: 0px 0px 1px 0px;
+              outline: none;
               &:last-of-type{
                 margin-top: 50px;
                 font-family: "mongoose-regular";
@@ -117,16 +123,20 @@ export default {
                 width: 150px;
                 height: 60px;
               }
+              &::-webkit-input-placeholder {
+                color: $grey-pale-opacity;
+                font-size: 14px;
+                text-shadow: none;
+                -webkit-text-fill-color: initial;
+              }
             }
           }
         }
       }
     }
     .inviteElementLeft{
-      width: 50%;
-      height: 100%;
-      margin: 0px;
-      padding: 0px;
+      @include center-y;
+      left: 50%;
     }
   }
 

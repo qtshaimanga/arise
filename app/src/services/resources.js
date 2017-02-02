@@ -35,6 +35,11 @@ export default [
     url: '/dist/assets/videos/texte.mp4'
   },
   {
+    type: 'mp4',
+    id: 'invitation_landing_video',
+    url: '/dist/assets/videos/invitation.mp4'
+  },
+  {
     type: 'text',
     id: 'cross_blue',
     url: '/dist/assets/icons/cross-blue.svg'

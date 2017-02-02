@@ -21,6 +21,24 @@
           <textarea class="send-text-form-input" placeholder="Write your message here" ref="textInput">
           </textarea>
           <div class="form-separator"></div>
+          <div class="font-style-container">
+            <div class="font-style size">
+              <div class="ico ico-size"></div>
+              <div class="txt">Size</div>
+            </div>
+            <div class="font-style bold">
+              <div class="ico ico-bold"></div>
+              <div class="txt">Bold</div>
+            </div>
+            <div class="font-style underline">
+              <div class="ico ico-underline"></div>
+              <div class="txt">Underline</div>
+            </div>
+            <div class="font-style invert">
+              <div class="ico ico-invert"></div>
+              <div class="txt">Invert</div>
+            </div>
+          </div>
         </div>
         <div class="send-text-btn" @click="onSendText">
           send
@@ -259,6 +277,40 @@ export default {
         opacity: 0.2;
         height: 1px;
         margin: 0 auto;
+      }
+      .font-style-container {
+        font-family: "cinetype-regular";
+        font-size: 12px;
+        display: inline-block;
+        padding: 15px;
+        .font-style {
+          display: inline-block;
+          margin-left: 20px;
+          cursor: pointer;
+          .ico {
+            width: 15px;
+            height: 15px;
+            float: left;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+          .txt {
+            color: $grey-pale-opacity;
+            margin-left: 20px;
+          }
+          .ico.ico-size {
+            background-image: url("../assets/icons/txt-size.svg");
+          }
+          .ico.ico-bold {
+            background-image: url("../assets/icons/txt-bold.svg");
+          }
+          .ico.ico-underline {
+            background-image: url("../assets/icons/txt-underline.svg");
+          }
+          .ico.ico-invert {
+            background-image: url("../assets/icons/txt-inverse.svg");
+          }
+        }
       }
     }
     .send-text-btn {
