@@ -27,7 +27,6 @@ export default {
   watch: {},
   created: function() {},
 	mounted: function() {
-    console.log(this.getListOfRessources);
   },
   methods:{}
 }
