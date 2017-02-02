@@ -1,10 +1,11 @@
 #include "Adafruit_Thermal.h"
+#include "logo_header.h"
 #include <Bridge.h>
 #include <YunClient.h>
 #include <PubSubClient.h>
 
 #include "SoftwareSerial.h"
-#define TX_PIN 2 // Arduino transmit  YELLOW WIRE  labeled RX on printer
+#define TX_PIN 2 // Arduino transmit  BLUE WIRE  labeled RX on printer
 #define RX_PIN 3 // Arduino receive   GREEN WIRE   labeled TX on printer
 
 char message_buff[100];
@@ -17,9 +18,9 @@ Adafruit_Thermal printer(&mySerial);     // Pass addr to printer constructor
 
 void setup() {
   Bridge.begin();
-  client = PubSubClient("test.mosquitto.org", 1883, callback, yun);
+  client = PubSubClient("beeenj.fr", 1883, callback, yun);
   mySerial.begin(9600);  // Initialize SoftwareSerial
-  Serial.begin(9600);
+  //Serial.begin(9600);
   //while (!mySerial);
   printer.begin();        // Init printer (same regardless of serial type)
 }
@@ -48,7 +49,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   message_buff[i] = '\0';
 
   String msgString = String(message_buff);
-  Serial.println(msgString);
+  //Serial.println(msgString);
 
   // Print message on printer
   printer.justify('C');
@@ -56,7 +57,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
   printer.println("");
   printer.println("");
   printer.println("");
-
+  printer.justify('C');
+  printer.printBitmap(logo_header_width, logo_header_height, logo_header_data);
+  printer.println("");
+  printer.println("");
+  printer.println("");
 }
 
 /*void printer_test() {
