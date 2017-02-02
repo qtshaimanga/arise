@@ -3,7 +3,8 @@
     <transition name="fade" appear>
       <loader v-show="getLoaderDisplayer"></loader>
     </transition>
-    <router-view class="view"></router-view>
+    <router-view class="view">
+    </router-view>
   </div>
 </template>
 
@@ -27,7 +28,7 @@ export default {
     }
   },
   mounted: function() {
-    this.creditsLog();
+    //this.creditsLog();
   },
   methods:{
     creditsLog() {

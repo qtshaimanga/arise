@@ -6,7 +6,7 @@
         yay !
       </div>
       <div class="text-sent-quote">
-        Your text is printed. Jantana is gonna</br>
+        Your text is printed. {{ name }} is gonna</br>
         be very happy to see it.
       </div>
       <div class="return-send-btn" @click="goSend">
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import User from '../assets/data/user.json'; //Test DATA
 import aHeader from '../components/aHeader';
 import TweenMax from 'gsap';
 
@@ -31,6 +32,9 @@ export default {
   data () {
     return {
       progress: Number(),
+      name: "Anonyme",
+      user: User,
+      id: String()
     }
   },
   vuex: {
@@ -47,11 +51,17 @@ export default {
   },
   watch: {
 	},
+  created: function() {
+    if( this.$route.params.id != undefined){
+        this.id = this.$route.params.id;
+        this.name = this.user[this.id].correpondant.name
+    }
+  },
 	mounted() {
   },
   methods:{
     goSend() {
-      this.$router.push('/send');
+      this.$router.push({name:'send', params:{ id:this.id}});
     }
   }
 }

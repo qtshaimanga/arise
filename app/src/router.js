@@ -5,7 +5,8 @@ import App from './App'
 import Start from './containers/Start'
 import Send from './components/Send'
 import MainSend from './containers/MainSend'
-import TextSent from './components/TextSent'
+import TextSent from './containers/TextSent'
+import SetUp from './containers/SetUp'
 import Invite from './containers/Invite'
 
 Vue.use(VueRouter)
@@ -17,19 +18,24 @@ const routes = [
     component: Start
   },
   {
-    path: '/send',
+    path: '/send/:id?',
     name : 'send',
     component: MainSend
   },
   {
-    path: '/text-sent',
+    path: '/text-sent/:id?',
     name : 'text-sent',
     component: TextSent
   },
   {
-    path: '/invite',
+    path: '/:id/invite',
     name : 'invite',
     component: Invite
+  },
+  {
+    path: '/setup',
+    name : 'set-up',
+    component: SetUp
   },
   {
     path: '/*',

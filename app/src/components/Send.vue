@@ -4,7 +4,7 @@
       <div class="send-content-container send-text-landing">
         <div class="send-separator send-text-separator"></div>
         <div class="send-title">
-          send text to jantana
+          send text to {{ name }}
         </div>
         <div class="send-quote" ref="sendTextQuoteEl">
           What about a lyric,</br>
@@ -31,7 +31,7 @@
       <div class="send-content-container send-image-landing" ref="imageContentEl">
         <div class="send-separator send-image-separator"></div>
         <div class="send-title" @click="sendImageClick">
-          send image to jantana
+          send image to {{ name }}
         </div>
         <div class="send-quote" ref="sendImageQuoteEl">
           Your worst selfie,</br>
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import User from '../assets/data/user.json'; //Test DATA
 import TweenMax from 'gsap';
 
 import { setLoaderDisplayerState, setProgressValueState, setListOfRessourcesState } from '../vuex/actions';
@@ -65,6 +66,9 @@ export default {
   data () {
     return {
       progress: Number(),
+      name: "Anonyme",
+      id: String(),
+      user: User
     }
   },
   vuex: {
@@ -81,6 +85,12 @@ export default {
   },
   watch: {
 	},
+  created(){
+    if( this.$route.params.id != undefined){
+      this.id = this.$route.params.id;
+      this.name = this.user[this.id].correpondant.name
+    }
+  },
 	mounted() {
     this.sendTextQuoteEl = this.$refs.sendTextQuoteEl;
     this.sendImageQuoteEl = this.$refs.sendImageQuoteEl;
