@@ -31,8 +31,18 @@ export default [
   },
   {
     type: 'mp4',
+    id: 'box_video',
+    url: '/dist/assets/videos/box.mp4'
+  },
+  {
+    type: 'mp4',
     id: 'send_txt_landing_video',
     url: '/dist/assets/videos/texte.mp4'
+  },
+  {
+    type: 'mp4',
+    id: 'teaser',
+    url: '/dist/assets/videos/teaser_arise.mp4'
   },
   {
     type: 'mp4',
@@ -55,8 +65,28 @@ export default [
     url: '/dist/assets/icons/cross-blue.svg'
   },
   {
-    type: 'text',
+    type: 'png',
+    id: 'planer',
+    url: '/dist/assets/images/avion.png'
+  },
+  {
+    type: 'png',
+    id: 'equipe',
+    url: '/dist/assets/images/equipe.png'
+  },
+  {
+    type: 'png',
+    id: 'fleche',
+    url: '/dist/assets/images/fleche_home.png'
+  },
+  {
+    type: 'png',
     id: 'printer',
-    url: '/dist/assets/icons/printer.svg'
+    url: '/dist/assets/images/printer.png'
+  },
+  {
+    type: 'png',
+    id: 'gobelins',
+    url: '/dist/assets/images/gobelins.png'
   },
 ]
