@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 
-import Start from './containers/Start'
+import Home from './containers/Home'
 import Send from './components/Send'
 import MainSend from './containers/MainSend'
 import TextSent from './containers/TextSent'
@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/',
     name : 'home',
-    component: Start
+    component: Home
   },
   {
     path: '/send/:id?',
@@ -40,7 +40,7 @@ const routes = [
   {
     path: '/*',
     name : 'notFound',
-    component: Start
+    component: Home
   }
 ];
 

@@ -4,7 +4,13 @@
       <div class="header-logo">
       </div>
     </div>
-    <p v-if="serialNumber"> printer n° {{ serialNumber }} </p>
+    <p v-if="serialNumber" id="serial-button"> printer n° {{ serialNumber }} </p>
+    <div class="header-button" v-if="!serialNumber">
+      <!-- <img :src="getListOfRessources.printer.file.src"/> -->
+      <p id="printer-button" >
+        <router-link to="/setup"> MY PRINTER </router-link>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -66,15 +72,41 @@ export default {
         background-repeat: no-repeat;
       }
     }
-    p {
+
+    #serial-button{
+      @include center-y;
       font-family: "cinetype-regular";
-      right: 40px;
-      color: $grey-pale-opacity;
       font-size: 0.8rem;
-      opacity: 50%;
+      color: $grey-pale-opacity;
+      right: 60px;  //deso
       margin: 0px;
       padding: 0px;
       @include center-y;
+    }
+
+    .header-button {
+      right: 0px;
+      margin: 0px;
+      padding: 0px;
+      background-color: #eef8f9;
+      height: 100%;
+      width: 200px;
+      @include center-y;
+      #printer-button{
+        margin-top: 35px; //deso
+        text-align: center;
+        a{
+          text-decoration: none;
+          font-family: "cinetype-regular";
+          font-size: 0.8rem;
+          color: $grey-pale-opacity;
+        }
+      }
+      img{
+        // background-color: red;
+        // width: 20px;
+        // height: 20px;
+      }
     }
   }
 

@@ -1,9 +1,11 @@
 <template>
   <div class="set-up" v-if="!getLoaderDisplayer">
     <div class="container">
-      <img :src="getListOfRessources.logo_header.file.src"/>
+      <transition name="test" appear>
+        <img ref="logo" v-show="true" :src="getListOfRessources.logo_header.file.src"/>
+      </transition>
       <div>
-        <input type="text" name="code" @keyup.enter="gotToInvite">
+        <input type="text" name="code" @keyup.enter="gotToInvite" maxlength="4">
       </div>
       <p>Please enter the code </br> written on the paper</p>
     </div>
@@ -12,6 +14,7 @@
 </template>
 
 <script>
+import {TweenMax}  from 'gsap';
 // import { } from '../vuex/actions';
 import { getListOfRessourcesState, getLoaderDisplayerState } from '../vuex/getters';
 
@@ -19,7 +22,9 @@ export default {
   name: 'setUp',
   components: {},
   data () {
-    return {}
+    return {
+      logo: Object()
+    }
   },
   vuex: {
     actions: {
@@ -36,6 +41,9 @@ export default {
   },
   created: function() {},
 	mounted: function() {
+  },
+  updated: function(){
+    TweenMax.from(this.$refs.logo, 0.5, { y:-10 , opacity:0 , ease:Power1.easeInOut });
   },
   methods:{
     gotToInvite: function (event){
@@ -75,12 +83,16 @@ export default {
       margin-bottom: 25%;
     }
     input{
-      width: 300px;
+      width: 270px;
       height: 100px;
       border: solid 2px $grey-pale;
       font-family: "mongoose-regular";
       font-size: 35pt;
+      letter-spacing: 40px;
+      text-align: center;
+      padding-left: 30px;
     }
+
     p{
       text-align: center;
       margin-top: 25%;
