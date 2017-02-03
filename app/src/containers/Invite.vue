@@ -7,9 +7,9 @@
           <p> It's time to setup your printer </br> account so you can invite </br>  people to send you amazing stuff ! <p>
           <div class="inviteForm">
             <form>
-              <input type="text" name="name" placeholder="Your name"></br>
-              <input type="text" name="email" placeholder="Your email"></br>
-              <input type="submit" value="Next">
+              <input type="text" name="name" placeholder="Your friend's name" ref="name"></br>
+              <input type="text" name="email" placeholder="Your friend's email" ref="email"></br>
+              <div class="send-invite-btn" @click="onSendEmail">Send invite</div>
             </from>
           </div>
         </div>
@@ -56,6 +56,16 @@ export default {
     //TODO ex envoyer l'adrese suivante http://localhost:8080/text-sent/1234 avec this.id
   },
   methods:{
+    onSendEmail() {
+      this.email = this.$refs.email;
+      this.name = this.$refs.name;
+      this.$http.post('http://localhost:3000/send-invite', {email: this.email.value, name: this.name.value}).then(response => {
+        console.log("response : ",response);
+        this.$router.push({name:'text-sent', params:{ id:this.id}});
+      }, response => {
+        // error callback
+      });
+    }
   }
 }
 </script>
@@ -113,22 +123,24 @@ export default {
               border-bottom: solid 1px black;
               border-width: 0px 0px 1px 0px;
               outline: none;
-              &:last-of-type{
-                margin-top: 50px;
-                font-family: "mongoose-regular";
-                font-size: 25pt;
-                color: $white;
-                border: none;
-                background-color: $salmon-hot;
-                width: 150px;
-                height: 60px;
-              }
               &::-webkit-input-placeholder {
                 color: $grey-pale-opacity;
                 font-size: 14px;
                 text-shadow: none;
                 -webkit-text-fill-color: initial;
               }
+            }
+            .send-invite-btn {
+              margin-top: 50px;
+              font-family: "mongoose-regular";
+              font-size: 25pt;
+              color: $white;
+              line-height: 60px;
+              padding-left: 20px;
+              background-color: $salmon-hot;
+              width: 150px;
+              height: 60px;
+              cursor: pointer;
             }
           }
         }

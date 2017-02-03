@@ -1,7 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser');
 var mqtt = require('mqtt')
-// var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer');
 
 
 var client  = mqtt.connect('mqtt://beeenj.fr')
@@ -30,31 +30,6 @@ client.on('message', function (topic, message) {
 app.get('/', function (req, res) {
   res.send('Hello World!');
   console.log('get receive');
-  // create reusable transporter object using the default SMTP transport
-  // let transporter = nodemailer.createTransport({
-  //     host: 'ssl0.ovh.net',
-  //     auth: {
-  //         user: 'hello@jant.fr',
-  //         pass: '***'
-  //     }
-  // });
-  //
-  // // setup email data with unicode symbols
-  // let mailOptions = {
-  //     from: '"Jant 👻" <hello@jant.fr>', // sender address
-  //     to: 'benjamin.gammaire@gmail.com', // list of receivers
-  //     subject: 'Hello ✔', // Subject line
-  //     text: 'Hello world ?', // plain text body
-  //     html: '<b>Hello world ?</b>' // html body
-  // };
-  //
-  // // send mail with defined transport object
-  // transporter.sendMail(mailOptions, (error, info) => {
-  //     if (error) {
-  //         return console.log(error);
-  //     }
-  //     console.log('Message %s sent: %s', info.messageId, info.response);
-  // });
 })
 
 app.route('/message')
@@ -62,6 +37,38 @@ app.route('/message')
     res.json(req.body);
     console.log(req.body);
     client.publish('arise', JSON.stringify(req.body));
+})
+
+app.route('/send-invite')
+  .post(function (req, res) {
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: 'ssl0.ovh.net',
+        auth: {
+            user: 'hello@jant.fr',
+            pass: '***'
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Arise 💌" <hello@jant.fr>', // sender address
+        to: req.body.email, // list of receivers
+        subject: req.body.name + ', you are invited', // Subject line
+        html: '<b>Here is <a href="localhost:8080/send/1234">the link</a> to send messages to your friend !</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+
+
+    res.json(req.body);
 })
 
 app.listen(3000, function () {
