@@ -94,7 +94,7 @@ export default {
       //event.preventDefault();
       this.email = this.$refs.email;
       this.name = this.$refs.name;
-      this.$http.post('http://localhost:3000/send-invite', {email: this.email.value, name: this.name.value}).then(response => {
+      this.$http.post('http://localhost:3000/send-invite', {email: this.email.value, name: this.name.value, id: this.id}).then(response => {
         console.log("response : ",response);
         this.email.value = "";
         this.name.value = "";

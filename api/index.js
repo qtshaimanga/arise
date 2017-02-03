@@ -2,6 +2,8 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var mqtt = require('mqtt')
 var nodemailer = require('nodemailer');
+var EmailTemplate = require('email-templates').EmailTemplate
+var path = require('path')
 
 
 var client  = mqtt.connect('mqtt://beeenj.fr')
@@ -47,25 +49,34 @@ app.route('/send-invite')
         host: 'ssl0.ovh.net',
         auth: {
             user: 'hello@jant.fr',
-            pass: '***'
+            pass: '**'
         }
     });
 
-    // setup email data with unicode symbols
-    let mailOptions = {
+    // let htmlContent = '<b>Follow this link to send messages to your friend !</b></br>';
+    // htmlContent += '<a href=\"localhost:8080/send/'+req.body.id +'\">the link</a>';
+
+    var templateDir = path.join(__dirname, 'template')
+
+    var newsletter = new EmailTemplate(templateDir)
+    newsletter.render(function (err, result) {
+      let mailOptions = {
         from: '"Arise 💌" <hello@jant.fr>', // sender address
         to: req.body.email, // list of receivers
         subject: req.body.name + ', you are invited', // Subject line
-        html: '<b>Here is <a href="localhost:8080/send/1234">the link</a> to send messages to your friend !</b>' // html body
-    };
+        html: result.html // html body
+      };
 
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            return console.log(error);
+          return console.log(error);
         }
         console.log('Message %s sent: %s', info.messageId, info.response);
-    });
+      });
+    })
+
+    // setup email data with unicode symbols
 
 
     res.json(req.body);
