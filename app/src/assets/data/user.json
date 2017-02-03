@@ -1,24 +1,24 @@
 {
   "1234": {
-    "expediteur": {
-      "name": "Janthana",
-      "email": "janthana@gmail.com",
+    "correpondant": {
+      "name": "Jantana",
+      "email": "jantana@gmail.com",
       "password": "OBHFKBJBKJKBZBHLB178KB"
     },
-    "correpondant": {
+    "expediteur": {
       "name": "Nicolas",
       "email": "nicolas@gmail.com",
       "password": "0987BN?LKN ?B?N?KHBNOL"
     }
   },
   "4321": {
-    "expediteur": {
+    "correpondant": {
       "name": "Quentin",
       "email": "quentin@gmail.com",
       "password": "GHVJBKNJLhjk876543HGVJ"
     },
-    "correpondant": {
-      "name": "Benjamain",
+    "expediteur": {
+      "name": "Benjamin",
       "email": "benjamin@gmail.com",
       "password": "ioblhvvJBVKG09897867KJ"
     }

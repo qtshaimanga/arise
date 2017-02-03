@@ -107,6 +107,7 @@ export default {
     if( this.$route.params.id != undefined){
       this.id = this.$route.params.id;
       this.name = this.user[this.id].correpondant.name
+      this.sender = this.user[this.id].expediteur.name
     }
   },
 	mounted() {
@@ -205,7 +206,7 @@ export default {
     },
     onSendText() {
       this.message = this.$refs.textInput;
-      this.$http.post('http://localhost:3000/message', {message: this.message.value}).then(response => {
+      this.$http.post('http://localhost:3000/message', {message: this.message.value, name: this.sender}).then(response => {
         console.log("response : ",response);
         this.$router.push({name:'text-sent', params:{ id:this.id}});
       }, response => {

@@ -1,25 +1,29 @@
 #include "Adafruit_Thermal.h"
+#include "logo_header.h"
 #include <Bridge.h>
 #include <YunClient.h>
 #include <PubSubClient.h>
+#include <Process.h>
+#include "ArduinoJson.h"
 
 #include "SoftwareSerial.h"
-#define TX_PIN 2 // Arduino transmit  YELLOW WIRE  labeled RX on printer
+#define TX_PIN 2 // Arduino transmit  BLUE WIRE  labeled RX on printer
 #define RX_PIN 3 // Arduino receive   GREEN WIRE   labeled TX on printer
 
-char message_buff[100];
+char message_buff[50];
 
 YunClient yun;
 PubSubClient client;
+Process date;
 
 SoftwareSerial mySerial(RX_PIN, TX_PIN); // Declare SoftwareSerial obj first
 Adafruit_Thermal printer(&mySerial);     // Pass addr to printer constructor
 
 void setup() {
   Bridge.begin();
-  client = PubSubClient("test.mosquitto.org", 1883, callback, yun);
+  client = PubSubClient("beeenj.fr", 1883, callback, yun);
   mySerial.begin(9600);  // Initialize SoftwareSerial
-  Serial.begin(9600);
+  //Serial.begin(9600);
   //while (!mySerial);
   printer.begin();        // Init printer (same regardless of serial type)
 }
@@ -46,17 +50,36 @@ void callback(char* topic, byte* payload, unsigned int length) {
     message_buff[i] = payload[i];
   }
   message_buff[i] = '\0';
-
-  String msgString = String(message_buff);
-  Serial.println(msgString);
-
+  // create jsonBuffer and parse it
+  StaticJsonBuffer<100> jsonBuffer;
+  JsonObject& root = jsonBuffer.parseObject(message_buff);
+  const char* message = root["message"];
+  const char* senderName = root["name"];
+  
+  // Get actual date and time
+  date.begin("/bin/date");
+  date.addParameter("+%d/%m/%Y %T");
+  date.run();
+  
   // Print message on printer
+  printer.justify('L');
+  while (date.available()>0) {
+    // print the results we got.
+    printer.print(date.readString());
+  }
+  printer.print("From : ");
+  printer.print(senderName);
+  printer.println("");
+  printer.println("");
   printer.justify('C');
-  printer.println(msgString);
+  printer.println(message);
+  printer.println("");
+  printer.println("");
+  printer.justify('C');
+  printer.printBitmap(logo_header_width, logo_header_height, logo_header_data);
   printer.println("");
   printer.println("");
   printer.println("");
-
 }
 
 /*void printer_test() {
