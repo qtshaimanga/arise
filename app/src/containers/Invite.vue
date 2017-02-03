@@ -4,21 +4,24 @@
     <div class="container">
       <div class="invitElementRight" v-show="moi">
         <div class="element">
-          <p> It's time to setup your printer </br> account so you can invite </br>  people to send you amazing stuff ! <p>
+          <p> It's time to setup your printer </br> account in order to continue ! <p>
           <div class="inviteForm">
             <form>
-              <input type="text" name="name" placeholder="Your name"></br>
+              <input type="text" name="name" placeholder="Your name" ref="ownerNameField"></br>
               <input type="text" name="email" placeholder="Your email"></br>
-              <!-- <input type="submit" value="Next" @click="moiToToi"> -->
               <div class="send-invite-btn" @click="moiToToi">Next</div>
             </from>
           </div>
+        </div>
+        <div class="inviteElementLeft">
+          <video :src="getListOfRessources.lock_landing_video.file.src" width="600" height="600" ref="lockVideo" class="video-invitation">
+          </video>
         </div>
       </div>
 
       <div class="invitElementRight" v-show="toi">
         <div class="element">
-          <p> It's time to setup your printer </br> account so you can invite </br>  people to send you amazing stuff ! <p>
+          <p> Great {{ owner }}, now you can send </br> invites to your close ones ! <p>
           <div class="inviteForm">
             <form>
               <input type="text" name="name" placeholder="Your friend's name" ref="name"></br>
@@ -27,11 +30,12 @@
             </from>
           </div>
         </div>
+        <div class="inviteElementLeft">
+          <video :src="getListOfRessources.invitation_landing_video.file.src" autoplay loop width="600" height="600" ref="invitationVideo" class="video-invitation">
+          </video>
+        </div>
       </div>
-      <div class="inviteElementLeft">
-        <video :src="getListOfRessources.invitation_landing_video.file.src" autoplay loop width="600" height="600" ref="invitationVideo" class="video-invitation">
-        </video>
-      </div>
+
     </div>
   </div>
 </template>
@@ -52,8 +56,10 @@ export default {
     return {
       id: Number(),
       invitationVideo: Object(),
+      lockVideo: Object(),
       moi: true,
-      toi: false
+      toi: false,
+      owner: String()
     }
   },
   vuex: {
@@ -74,8 +80,15 @@ export default {
   methods:{
     moiToToi: function(event){
       event.preventDefault();
-      this.moi = false;
-      this.toi = true;
+      this.ownerNameField = this.$refs.ownerNameField;
+      this.lockVideo = this.$refs.lockVideo;
+      this.lockVideo.play();
+      this.lockVideo.onended = ()=>{
+        this.owner = this.ownerNameField.value;
+        this.moi = false;
+        this.toi = true;
+      }
+
     },
     onSendEmail(event) {
       //event.preventDefault();
@@ -83,7 +96,9 @@ export default {
       this.name = this.$refs.name;
       this.$http.post('http://localhost:3000/send-invite', {email: this.email.value, name: this.name.value}).then(response => {
         console.log("response : ",response);
-        this.$router.push({name:'text-sent', params:{ id:this.id}});
+        this.email.value = "";
+        this.name.value = "";
+        // this.$router.push({name:'text-sent', params:{ id:this.id}});
       }, response => {
         // error callback
       });
@@ -124,6 +139,7 @@ export default {
         margin-top: auto;
         margin-bottom: auto;
         margin-left: $borderLeft;
+        // @include transition( all .1s ease-in);
         p{
           color: $grey-pale;
           font-family: "mongoose-regular";
