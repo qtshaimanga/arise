@@ -60,8 +60,8 @@ app.get('/', function (req, res) {
 app.route('/message')
   .post(function (req, res) {
     res.json(req.body);
-    client.publish('arise', req.body.message);
-    console.log("POST : ", req.body.message);
+    console.log(req.body);
+    client.publish('arise', JSON.stringify(req.body));
 })
 
 app.listen(3000, function () {

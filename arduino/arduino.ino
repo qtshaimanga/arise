@@ -4,12 +4,13 @@
 #include <YunClient.h>
 #include <PubSubClient.h>
 #include <Process.h>
+#include "ArduinoJson.h"
 
 #include "SoftwareSerial.h"
 #define TX_PIN 2 // Arduino transmit  BLUE WIRE  labeled RX on printer
 #define RX_PIN 3 // Arduino receive   GREEN WIRE   labeled TX on printer
 
-char message_buff[100];
+char message_buff[50];
 
 YunClient yun;
 PubSubClient client;
@@ -49,9 +50,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
     message_buff[i] = payload[i];
   }
   message_buff[i] = '\0';
-
-  String msgString = String(message_buff);
-  //Serial.println(msgString);
+  // create jsonBuffer and parse it
+  StaticJsonBuffer<100> jsonBuffer;
+  JsonObject& root = jsonBuffer.parseObject(message_buff);
+  const char* message = root["message"];
+  const char* senderName = root["name"];
+  
+  // Get actual date and time
   date.begin("/bin/date");
   date.addParameter("+%d/%m/%Y %T");
   date.run();
@@ -62,11 +67,12 @@ void callback(char* topic, byte* payload, unsigned int length) {
     // print the results we got.
     printer.print(date.readString());
   }
+  printer.print("From : ");
+  printer.print(senderName);
   printer.println("");
   printer.println("");
   printer.justify('C');
-  printer.println(msgString);
-  printer.println("");
+  printer.println(message);
   printer.println("");
   printer.println("");
   printer.justify('C');
