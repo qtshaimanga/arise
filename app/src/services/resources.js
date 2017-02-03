@@ -44,4 +44,9 @@ export default [
     id: 'cross_blue',
     url: '/dist/assets/icons/cross-blue.svg'
   },
+  {
+    type: 'text',
+    id: 'printer',
+    url: '/dist/assets/icons/printer.svg'
+  },
 ]

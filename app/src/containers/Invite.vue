@@ -2,7 +2,20 @@
   <div class="invite"  v-if="!getLoaderDisplayer">
     <a-header :serial-number="id"></a-header>
     <div class="container">
-      <div class="invitElementRight">
+      <div class="invitElementRight" v-show="moi">
+        <div class="element">
+          <p> It's time to setup your printer </br> account so you can invite </br>  people to send you amazing stuff ! <p>
+          <div class="inviteForm">
+            <form>
+              <input type="text" name="name" placeholder="Your name"></br>
+              <input type="text" name="email" placeholder="Your email"></br>
+              <input type="submit" value="Next" @click="moiToToi">
+            </from>
+          </div>
+        </div>
+      </div>
+
+      <div class="invitElementRight" v-show="toi">
         <div class="element">
           <p> It's time to setup your printer </br> account so you can invite </br>  people to send you amazing stuff ! <p>
           <div class="inviteForm">
@@ -38,6 +51,8 @@ export default {
     return {
       id: Number(),
       invitationVideo: Object(),
+      moi: true,
+      toi: false
     }
   },
   vuex: {
@@ -56,6 +71,11 @@ export default {
     //TODO ex envoyer l'adrese suivante http://localhost:8080/text-sent/1234 avec this.id
   },
   methods:{
+    moiToToi: function(event){
+      event.preventDefault();
+      this.moi = false;
+      this.toi = true;
+    }
   }
 }
 </script>

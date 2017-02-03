@@ -10,3 +10,27 @@
   //transform: translateX(10px);
   opacity: 0;
 }
+
+//--
+
+.topToDown-enter-active {
+  transition: all 3s ease;
+}
+
+.topToDown-leave-active {
+  transition: all 3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.topToDown-enter, .topToDown-leave-to {
+  transform: translateY(-40px);
+  opacity: 0;
+}
+
+
+//--
+.test-enter-active, .test-leave-active {
+  transition: opacity 5s
+}
+.test-enter, .test-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
