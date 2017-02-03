@@ -45,6 +45,11 @@ export default [
     url: '/dist/assets/videos/lock.mp4'
   },
   {
+    type: 'mp4',
+    id: 'sended_video',
+    url: '/dist/assets/videos/sent.mp4'
+  },
+  {
     type: 'text',
     id: 'cross_blue',
     url: '/dist/assets/icons/cross-blue.svg'

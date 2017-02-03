@@ -1,6 +1,10 @@
 <template>
   <div class="text-sent-container" v-if="!getLoaderDisplayer">
     <a-header></a-header>
+    <div class="videoLeft">
+      <video :src="getListOfRessources.sended_video.file.src" loop autoplay width="700" height="700" class="video-sended">
+      </video>
+    </div>
     <div class="text-sent-center-container">
       <div class="text-sent-title">
         yay !
@@ -89,9 +93,14 @@ export default {
   height: 100%;
   background-color: $pale-pink;
 
+  .videoLeft {
+    @include center-y;
+    left: 10%;
+  }
+
   .text-sent-center-container {
-    @include center-xy;
-    text-align: center;
+    @include center-y;
+    left: 70%;
     display: inline-block;
     width: 400px;
     .text-sent-title {
@@ -116,9 +125,9 @@ export default {
       height: 60px;
       text-transform: uppercase;
       line-height: 65px;
-      margin: 60px auto 0 auto;
+      margin-top: 60px;
       letter-spacing: 2px;
-      // padding-left: 15px;
+      padding-left: 15px;
       cursor: pointer;
     }
   }
