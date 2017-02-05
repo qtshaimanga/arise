@@ -1,6 +1,6 @@
 #include "Adafruit_Thermal.h"
 #include "logo_header.h"
-#include <Bridge.h>
+#include <Bridge.h> 
 #include <YunClient.h>
 #include <PubSubClient.h>
 #include <Process.h>
@@ -71,12 +71,16 @@ void callback(char* topic, byte* payload, unsigned int length) {
   printer.print(senderName);
   printer.println("");
   printer.println("");
+  printer.println("");
   printer.justify('C');
   printer.println(message);
   printer.println("");
-  printer.println("");
   printer.justify('C');
   printer.printBitmap(logo_header_width, logo_header_height, logo_header_data);
+  printer.println("");
+  printer.println("");
+  printer.println("");
+  printer.println("");
   printer.println("");
   printer.println("");
   printer.println("");

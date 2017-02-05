@@ -49,7 +49,7 @@ app.route('/send-invite')
         host: 'ssl0.ovh.net',
         auth: {
             user: 'hello@jant.fr',
-            pass: '**'
+            pass: '***'
         }
     });
 
