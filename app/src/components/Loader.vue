@@ -45,7 +45,10 @@ export default {
 					TweenMax.set('#progress-bar', { width: this.progress+"%" });
 				},
         onComplete: () =>{
-          this.setLoaderDisplayer(false);
+        var that = this;
+        setTimeout(function(){
+          that.setLoaderDisplayer(false);
+         }, 1000);
         }
 			});
 		}

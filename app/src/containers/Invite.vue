@@ -10,7 +10,7 @@
               <input type="text" name="name" placeholder="Your name" ref="ownerNameField"></br>
               <input type="text" name="email" placeholder="Your email"></br>
               <div class="send-invite-btn" @click="moiToToi">Next</div>
-            </from>
+            </form>
           </div>
         </div>
         <div class="inviteElementLeft">
@@ -27,7 +27,7 @@
               <input type="text" name="name" placeholder="Your friend's name" ref="name"></br>
               <input type="text" name="email" placeholder="Your friend's email" ref="email"></br>
               <div class="send-invite-btn" @click="onSendEmail">Send invite</div>
-            </from>
+            </form>
           </div>
         </div>
         <div class="inviteElementLeft">

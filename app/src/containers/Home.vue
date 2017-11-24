@@ -55,7 +55,8 @@ export default {
   },
   watch: {},
   created: function() {},
-	mounted: function() {},
+	mounted: function() {
+  },
   methods:{}
 }
 </script>
